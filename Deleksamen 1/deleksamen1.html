@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innføring i Programmering: Deleksamen 1 - Feilsøking</title>
+    <link href="styles.css" rel="stylesheet" media="screen" />
+</head>
+<body>
+    <h1 id="text" class="animation">Error</h1>
+    <div id="salute">
+        <div class="before"></div>
+        <div class="after"></div>
+    </div>
+
+    <script>
+        /* 
+         * HER STARTER KODEN DU SKAL ENDRE! IKKE ENDRE NOE OVER DENNE KOMMENTAREN.
+         * Det er kun i denne delen av koden du skal finne og løse opp feil 
+         * for å komme fram til sluttresultatet. Du skal ikke endre noe HTML, men det
+         * kan du må lese HTML-koden underveis for å rydde opp alle feilene i JavaScriptet.
+         */
+
+        //Klargjør variabler for utregning
+        const startingPoint = 255
+        //  1. Feil på koden var at det var const, fordi verdien skal kunne endres og ikke være konstant, så jeg endret det til let
+        let checksum = 0
+        const multiplier = 3
+        //  2. Kommentaren under manglet en slash foran
+        //Ditt navn. PS: Bytt denne til ditt navn.
+        //Selve navnebyttet er ikke en feil som teller mot de 10 feilene du skal finne.
+        // 3. Stringen manglet anførselstegn
+        const myName = "Birhat";
+
+        //Klargjør variabel for bygging av tekst
+        // 4. Datatypen let hadde en ekstra t i seg
+        let greeting = "";
+        const saluteClass = "pyro";
+
+        //Kontroller datatype
+        if(typeof myName === "string") {
+            // 5. checksum hadde 2 ekstra m-er i seg
+            checksum = startingPoint * multiplier
+        } else {
+            checksum = startingPoint
+        }
+
+        //Kontroller checksum
+        // 6. en ekstra likhetstegn
+        if(checksum !== 765) {
+            greeting = "beklager"
+        } else {
+            greeting = "gratulerer"
+            //7.greeting hadde en ekstra e i seg
+            const output = greeting + ", " + myName + "<br />Du klarte det!"
+            //8. hentet feil id som var TEXT, når den egentlig heter text med små bokstaver
+            const textElement = document.getElementById("text");
+                //9. getElementById ble skrevet med stor D i slutten istendefor liten d
+            const saluteElement = document.getElementById("salute")
+            textElement.removeAttribute("class")
+            textElement.innerHTML = output
+            //10. saluteclass ble ikke skrevet med anførselstegn
+            saluteElement.setAttribute("class","saluteclass")
+            document.body.setAttribute("class","success")
+        }
+
+        /*
+         * IKKE ENDRE NOE ETTER DENNE KOMMENTAREN
+         */
+        
+    </script>
+</body>
+</html>
