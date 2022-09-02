@@ -1,8 +1,8 @@
-<p id="maillink"><a href="mailto:birhatrm@hiof.no">Send mail to Birhat</p>
+<p id="maillink"></p>
 
 <script>
             const name = "Birhat"
             const mail = "birhatrm@hiof.no"
-            const emailLink = ${name} ${mail}
+            const emailLink = `<a href="mailto:${mail}">Send mail to ${name}</a>` 
             document.getElementById("maillink").innerHTML = emailLink
 </script>
