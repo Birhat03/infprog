@@ -19,7 +19,7 @@
             <div id="points"><img src="img/points.png" /> <span id="points-count">0</span></div>
         </section>
         <aside id="hud-inventory">
-            <h3>Armory</h3>
+          <button onclick="myFunction()">  <h3 >Armory</h3> </button>
             <table id="showhide">
                 <tr>
                     <td><img src="img/longsword.png"></td>
@@ -67,6 +67,16 @@
             //Oppgave 5: regne ut poeng etter level og coins
             let points = (coins * 5) + (longsword * 5) + (warhammer * 15) + (battleaxe * 20) + (armour * 25)
             document.getElementById("points-count").innerHTML = points
+
+            //Ekstraoppgave: show hide armory
+            function myFunction() {
+  var x = document.getElementById("showhide");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 
     </script>
