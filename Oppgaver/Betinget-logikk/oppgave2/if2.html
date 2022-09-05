@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="utskrift"></p>
+
+    <script>
+                const age = 67
+                const tekst = document.getElementById("utskrift")
+                if ( age <= 17){
+
+                    tekst.innerHTML = "Du er ikke myndig"
+                }
+                else if ( age <=62 ) {
+
+                    tekst.innerHTML = "Du er myndig og klar for studier eller arbeidslivet"
+                }
+               else {
+                        tekst.innerHTML = "Du er pensjonsklar"
+               }
+
+    </script>
+</body>
+</html>
