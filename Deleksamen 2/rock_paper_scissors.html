@@ -127,7 +127,8 @@
     <section id="gamearea">
         <div id="playerSigns">
             <h2 id="instruction">Play your hand:<span id="choice"></span></h2>
-            <button type="button" onClick="playy('rock')" id="rockButton" class="playerChoice"><img src="rock.jpg" alt="Rock" /></button>
+            <!-- 3. feil: det står en ekstra y på play-->
+            <button type="button" onClick="play('rock')" id="rockButton" class="playerChoice"><img src="rock.jpg" alt="Rock" /></button>
             <button type="button" onClick="play('paper')" id="paperButton" class="playerChoice"><img src="paper.jpg" alt="Paper" /></button>
             <button type="button" onClick="play('scissors')" id="scissorsButton" class="playerChoice"><img src="scissors.jpg" alt="Scissors" /></button>
         </div>
@@ -162,7 +163,8 @@
          * On mouseover, show the alt-text of the image inside the button and add animation class
          * On mouseout, remove the text and class
          */
-        buttonss.forEach(button => {
+        // 2. feil: buttons ble skrevet med en ekstra s 
+        buttons.forEach(button => {
             button.addEventListener("mouseover", (event) => {
                 document.getElementById("choice").innerHTML = button.childNodes[0].alt
                 document.getElementById("choice").setAttribute("class","choiceAnimate")
@@ -171,8 +173,7 @@
                 document.getElementById("choice").innerHTML = ""
                 document.getElementById("choice").removeAttribute("class")
             })
-            
-        })
+            })
         // Function to run when we click a player sign button ( called play() ).
         // We pass one parameter: "playerSign", which is a text string indicating
         // the player's choice (rock, paper or scissors)
@@ -203,65 +204,100 @@
             //Lets write the computer selection to the console to make sure we have a valid hit:
             console.log("Computer selected: " + computerSign)
             // Good! Now we also have to show this on the website, by making #computer visible and filling it with HTML:
-            const computer = document.getElementByID("computer")
+            // 4. feil: Id ble skrevet med stor D   
+            const computer = document.getElementById("computer")
             
             computer.style.display = "block"
             /* OPPGAVE 2.1: FORKLAR HVA SOM SKJER PÅ LINJE 208
-             * _ditt svar her_ 
+             * På linje 208 så er det en konstant variabel kalt for computer som henter div elementet som har id kalt for computer 
              */
 
             computer.innerHTML = "Computer selects " + computerSign
             // Ok, now we have to check for rules! Paper beats rock, rock beat scissors, scissors beat paper.
             // This means if players sign beat computer sign, player wins. Lets try:
+
+            // Oppgave 5: hentet variabelen winnerDiv her istedet for at oppgave 5 skal fungere, uncaught reference error: Cannot access 'winnerDiv' before initialization
+            const winnerDiv = document.getElementById("winner")
+            winnerDiv.style.display = "block"
+            
             if(playerSign === "paper") {
                 if(computerSign === "rock") {
                     winner = "player"
+                     //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
+                     winnerDiv.innerHTML = "You win"
+                    //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
+                    document.getElementById("winner").style.backgroundColor = "#FFD700"
                 }
                 if(computerSign === "scissors") {
                     winner = "computer"
+                    // Oppgave 5: endret strengen når man taper til "You lost"
+                    winnerDiv.innerHTML = "You Lost"
                 }
                 if(computerSign === "paper") {
                     winner = "undecided"
+                    //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
+                    winnerDiv.innerHTML = "It's a Tie"
                 }
             }
             if(playerSign === "rock") {
                 if(computerSign === "rock") {
                     winner = "undecided"
+                    //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
+                    winnerDiv.innerHTML = "It's a Tie"
                 }
                 if(computerSign === "scissors") {
                     winner = "player"
+                     //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
+                     winnerDiv.innerHTML = "You win"
+                    //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
+                    document.getElementById("winner").style.backgroundColor = "#FFD700"
                 }
                 if(computerSign === "paper") {
                     winner = "computer"
+                    // Oppgave 5: endret strengen når man taper til "You lost"
+                    winnerDiv.innerHTML = "You Lost"
                 }
             }
             if(playerSign === "scissors") {
                 if(computerSign === "rock") {
                     winner = "computer"
+                    // Oppgave 5: endret strengen når man taper til "You lost"
+                    winnerDiv.innerHTML = "You Lost"
                 }
                 if(computerSign === "scissors") {
                     winner = "undecided"
+                    //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
+                    winnerDiv.innerHTML = "It's a Tie"
                 }
                 if(computerSign === "paper") {
                     winner = "player"
+                    //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
+                    winnerDiv.innerHTML = "You win"
+                    //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
+                    document.getElementById("winner").style.backgroundColor = "#FFD700"
+                    
                 }
             }
             //Now we have checks to set the winner. Let's write it to the website.
             //Now you know the drill: show #winner by display: block and fill it with HTML:
-            const winnerDiv = document.getElementById("winner")
-            winnerDiv.style.display = "block"
+            
+           
 
-            winnerDiv.innerHTML = "The winner is " + winner
+            
+            
             /* OPPGAVE 2.2: FORKLAR HVA SOM SKJER PÅ LINJE 254
-             * _ditt svar her_ 
+             * det betyr at variabelen winnerDiv som har hentet elementet som har div="winner", blir skrevet ut "The winner is" + variabelen som heter winner, 
+             variabelen winner popper ut med tekst boks som forteller hvem vinneren er (avhengig av hvem som vinner), når function play blir aktivert 
              */
 
             //Now, lastly, let's update the counter on how many games we have played:
             counter = counter + 1
+            //Oppgave 4: henta elementet med id=counter og endra fargen på tallet til rødt når function play blir aktivert
+            document.getElementById("counter").style.color = "#FF0000"
 
             document.getElementById("counter").innerHTML = counter
             /* OPPGAVE 2.3: FORKLAR HVA SOM SKJER PÅ LINJE 262
-             * _ditt svar her_ 
+             * variabelen let counter henter elementet som har id="counter" og skriver ut og plusser det med 1 for hver gang function play blir aktivert, for å telle hvor mange ganger man har spilt spillet
              */
 
             //And display the button for playing again:
@@ -287,7 +323,8 @@
         }
 
         //Function for random numnber, fetched from MDN web docs:
-        unction getRandomInt(max) {
+        //1. feil Function manglet en f foran (koden under)
+        function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
     </script>
