@@ -23,10 +23,12 @@
         <aside id="hud-inventory">
             <h3>Armory</h3>
             <table id="showhide">
+                <!--
                 <tr>
                     <td><img src="img/longsword.png"></td>
                     <td>Level: <span id="weapon-longsword"></span></td>
                 </tr>
+                
                 <tr>
                     <td><img src="img/warhammer.png"></td>
                     <td>Level: <span id="weapon-warhammer"></span></td>
@@ -39,6 +41,7 @@
                     <td><img src="img/armour.png"></td>
                     <td>Level: <span id="weapon-armour"></span></td>
                 </tr>
+                -->
             </table>
         </aside>
     </div>
@@ -62,14 +65,15 @@
         let warhammer = 18
         let battleaxe = 8
         let armour = 14
-        document.getElementById("weapon-longsword").innerHTML = longsword
+        /* document.getElementById("weapon-longsword").innerHTML = longsword 
         document.getElementById("weapon-warhammer").innerHTML = warhammer
         document.getElementById("weapon-battleaxe").innerHTML = battleaxe
         document.getElementById("weapon-armour").innerHTML = armour
         //OPPGAVE 2: IF VÅPEN HAR VERDI 10 ELLER HØYERE
-        if (longsword >= 10) {
+        /*if (longsword >= 10) {
                     document.getElementById("weapon-longsword").style.color ="#ffd700"
                 }
+        
         if (warhammer >= 10) {
                     document.getElementById("weapon-warhammer").style.color ="#ffd700"
                 }
@@ -86,9 +90,68 @@
             document.getElementById("lives-count").style.color ="#ff0000"
         }
 
-        //OPPGAVE 4: IF ARMORY LEVEL ER 0
-        
-        const weapons = ``
+        */
+
+        //workshop 2 oppgave 4 
+        const armoryTable = document.getElementById("showhide")
+        if(longsword > 0){
+            armoryTable.innerHTML += `
+            <tr>
+                    <td><img src="img/longsword.png"></td>
+                    <td>Level: <span id="weapon-longsword">${longsword}</span></td>
+                </tr>
+            `
+            if (longsword >= 10) {
+                    document.getElementById("weapon-longsword").style.color ="#ffd700"
+                }
+
+        }
+
+        if (warhammer > 0){
+            armoryTable.innerHTML += `
+            <tr>
+                <td><img src="img/warhammer.png"></td>
+                <td>Level: <span id="weapon-warhammer">${warhammer}</span></td>
+            </tr>
+            
+            `
+            if (warhammer >=10) {
+                document.getElementById("weapon-warhammer").style.color = "#ffd700"
+            }
+        }
+
+        if (battleaxe > 0){
+            armoryTable.innerHTML += `
+            
+            <tr>
+                    <td><img src="img/battleaxe.png"></td>
+                    <td>Level: <span id="weapon-battleaxe">${battleaxe}</span></td>
+                </tr>
+            
+            
+            `
+            if (battleaxe >= 10) {
+                    document.getElementById("weapon-battleaxe").style.color ="#ffd700"
+                }
+        }
+
+        if (armour > 0){
+            armoryTable.innerHTML += `
+            
+            <tr>
+                    <td><img src="img/armour.png"></td>
+                    <td>Level: <span id="weapon-armour">${armour}</span></td>
+                </tr>
+            
+            
+            `
+            if (armour >= 10) {
+                    document.getElementById("weapon-armour").style.color ="#ffd700"
+                }
+            
+
+
+        }
 
         //Oppgave 5: Utregning av poeng
         let points = (coins * 5) + (longsword * 5) + (warhammer * 15) + (battleaxe * 20) + (armour * 25)
