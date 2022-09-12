@@ -227,33 +227,45 @@
             // Oppgave 5: posisjonerte variabelen winnerDiv her istedet for at oppgave 5 skal fungere, uncaught reference error: Cannot access 'winnerDiv' before initialization
             const winnerDiv = document.getElementById("winner")
             winnerDiv.style.display = "block"
+           
+            
+            
+
             
             if(playerSign === "paper") {
                 if(computerSign === "rock") {
                     winner = "player"
                      //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
-                     winnerDiv.innerHTML = "You win"
+                     //Oppgave 7: satte winnerDiv i en timeout funksjon som gjør at winnerDiv vises etter 1 sekund når den blir aktivert 
+                     setTimeout(function(){ winnerDiv.innerHTML = "You win" }, 1000)
                     //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
-                    document.getElementById("winner").style.backgroundColor = "#FFD700"
+                    //Oppgave 7: satte timeout når winnerDiven blir gull sånn at man ikke vet på forhånd at man vinner eller når man taper 
+                    setTimeout(function(){winnerDiv.style.backgroundColor = "#FFD700"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen playerWins med 1 for hver gang spilleren vinner og hentet id=playerwins
                     playerWins = playerWins + 1
-                    document.getElementById("playerwins").innerHTML = playerWins    
+                    //Oppgave 7: satte timeout på antall wins/loss/uavgjort som blir lagt til
+                    setTimeout(function(){document.getElementById("playerwins").innerHTML = playerWins }, 1000)   
                 }
                 if(computerSign === "scissors") {
                     winner = "computer"
                     // Oppgave 5: endret strengen når man taper til "You lost"
-                    winnerDiv.innerHTML = "You Lost"
+                   setTimeout(function(){winnerDiv.innerHTML = "You Lost"}, 1000) 
+                   setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen computerWins med 1 for hver gang spilleren taper og hentet id="computerwins"
                     computerWins = computerWins + 1
-                    document.getElementById("computerwins").innerHTML = computerWins
+                    setTimeout(function(){document.getElementById("computerwins").innerHTML = computerWins}, 1000)   
                 }
                 if(computerSign === "paper") {
                     winner = "undecided"
                     //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
-                    winnerDiv.innerHTML = "It's a Tie"
+                    setTimeout(function(){winnerDiv.innerHTML = "It's a Tie"}, 1000)    
+                    setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen Draws med 1 for hver gang det blir uavgjort og hentet id="draws"
                     Draws = Draws + 1
-                    document.getElementById("draws").innerHTML = Draws
+                    setTimeout(function(){document.getElementById("draws").innerHTML = Draws}, 1000)    
 
                 }
             }
@@ -261,56 +273,68 @@
                 if(computerSign === "rock") {
                     winner = "undecided"
                     //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
-                    winnerDiv.innerHTML = "It's a Tie"
+                    setTimeout(function(){winnerDiv.innerHTML = "It's a Tie"}, 1000)    
+                    setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen Draws med 1 for hver gang det blir uavgjort og hentet id="draws"
                     Draws = Draws + 1
-                    document.getElementById("draws").innerHTML = Draws
+                    setTimeout(function(){document.getElementById("draws").innerHTML = Draws}, 1000) 
                 }
                 if(computerSign === "scissors") {
                     winner = "player"
                      //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
-                     winnerDiv.innerHTML = "You win"
+                     //Oppgave 7: satte winnerDiv i en timeout funksjon som gjør at winnerDiv vises etter 1 sekund når den blir aktivert 
+                     setTimeout(function(){ winnerDiv.innerHTML = "You win" }, 1000)
                     //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
-                    document.getElementById("winner").style.backgroundColor = "#FFD700"
+                    setTimeout(function(){winnerDiv.style.backgroundColor = "#FFD700"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen playerWins med 1 for hver gang spilleren vinner og hentet id=playerwins
                     playerWins = playerWins + 1
-                    document.getElementById("playerwins").innerHTML = playerWins    
+                    setTimeout(function(){document.getElementById("playerwins").innerHTML = playerWins }, 1000)   
                 }
                 if(computerSign === "paper") {
                     winner = "computer"
                     // Oppgave 5: endret strengen når man taper til "You lost"
-                    winnerDiv.innerHTML = "You Lost"
+                   setTimeout(function(){winnerDiv.innerHTML = "You Lost"}, 1000) 
+                   setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen computerWins med 1 for hver gang spilleren taper og hentet id="computerwins"
                     computerWins = computerWins + 1
-                    document.getElementById("computerwins").innerHTML = computerWins
+                    setTimeout(function(){document.getElementById("computerwins").innerHTML = computerWins}, 1000)   
                 }
             }
             if(playerSign === "scissors") {
                 if(computerSign === "rock") {
                     winner = "computer"
                     // Oppgave 5: endret strengen når man taper til "You lost"
-                    winnerDiv.innerHTML = "You Lost"
+                   setTimeout(function(){winnerDiv.innerHTML = "You Lost"}, 1000) 
+                   setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen computerWins med 1 for hver gang spilleren taper og hentet id="computerwins"
                     computerWins = computerWins + 1
-                    document.getElementById("computerwins").innerHTML = computerWins
+                    setTimeout(function(){document.getElementById("computerwins").innerHTML = computerWins}, 1000)  
                 }
                 if(computerSign === "scissors") {
                     winner = "undecided"
                     //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
-                    winnerDiv.innerHTML = "It's a Tie"
+                    setTimeout(function(){winnerDiv.innerHTML = "It's a Tie"}, 1000)    
+                    setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen Draws med 1 for hver gang det blir uavgjort og hentet id="draws"
                     Draws = Draws + 1
-                    document.getElementById("draws").innerHTML = Draws
+                    setTimeout(function(){document.getElementById("draws").innerHTML = Draws}, 1000) 
                 }
                 if(computerSign === "paper") {
                     winner = "player"
-                    //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
-                    winnerDiv.innerHTML = "You win"
+                     //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
+                     //Oppgave 7: satte winnerDiv i en timeout funksjon som gjør at winnerDiv vises etter 1 sekund når den blir aktivert 
+                     setTimeout(function(){ winnerDiv.innerHTML = "You win" }, 1000)
                     //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
-                    document.getElementById("winner").style.backgroundColor = "#FFD700"
+                    setTimeout(function(){winnerDiv.style.backgroundColor = "#FFD700"}, 1000) 
+                    winnerDiv.style.color = "#000000"
                     //Oppgave 6: plussa variabelen playerWins med 1 for hver gang spilleren vinner og hentet id=playerwins
-                     playerWins = playerWins + 1
-                    document.getElementById("playerwins").innerHTML = playerWins    
+                    playerWins = playerWins + 1
+                    setTimeout(function(){document.getElementById("playerwins").innerHTML = playerWins }, 1000)      
                     
                 }
             }
