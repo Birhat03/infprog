@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals - Oppgave 2</title>
+</head>
+<body>
+    <p id="setning"></p>
+    
+    <script>
+         const dyr = ["Sjiraff", "Struts", "Slange", "Flamingo", "Ulv", "Gorilla", "Løve", "Krokodille", "Elefant", "Tiger"]
+         const animals = ["Giraffe", "Ostrich", "Snake", "Flamingo", "Wolf", "Gorilla", "Lion", "Crocodile", "Elephant", "Tiger"]
+         const dyr1 = dyr[0]
+         const animal1 = animals[0]
+         const dyr2 = dyr[1]
+         const animal2 = animals[1]
+         const tekst = document.getElementById("setning")
+         tekst.innerHTML = `${dyr1} er et dyr. Det heter ${animal1} på engelsk. ${dyr2} er også et dyr, som heter ${animal2}`
+         
+    </script>
+</body>
+</html>
