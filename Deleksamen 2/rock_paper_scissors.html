@@ -206,7 +206,10 @@
             // That means we can create a function that does this for us. So it is done below this function.
             // Now, let's use it to get a random number from 0 (first index of an array) to array.length - 1
             // (maximum index of an array is its length minus 1)
-            const randomIndex = getRandomInt(signs.length - 1)
+
+            //Litt usikker på hva jeg endret her men ser ut som variabelen ikke hentet alle 3 arrays, bare 2 av dem siden det ble subtrahert med 1 så jeg fjerna det, sånn at computer kan velge alle 3 tegn (rock, paper, scissors)
+            const randomIndex = getRandomInt(signs.length)
+
             //Now we can call the random computer selected sign from the signs-array:
             const computerSign = signs[randomIndex]
             //Lets write the computer selection to the console to make sure we have a valid hit:
