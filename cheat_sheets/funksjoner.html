@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funksjoner Cheat sheet</title>
+</head>
+<body>
+    <p id="text" onclick="textChange()">Her står det en tekst. Klikk meg</p>
+    <p>Resultat <span id="result"></span></p>
+    <p>Biletten tilhører<span id="person"></span></p>
+
+    <script>
+
+        //Denne funksjonen blir kalt og kjører via onClick-metoden i <p id="text"> 
+        function textChange() {
+            document.getElementById("text").innerHTML = "Dette er en annen tekst"
+        }
+
+        //Deklarerer en funksjon textChangeParameter, som tar imot en parameter textString
+        function textChangeParameter(textstring) {
+            document.getElementById("text").innerHTML = textstring
+        }
+
+        //Vi kaller funksjonen textChangeParameter, og sender med en tekststreng som verdi i parameteren textString
+        textChangeParameter("Dette er en tekst sendt med som parameter. Denne kan du klikke på for å kalle textchange() via onClick")
+
+        //Lage en enkel addisjonsFunksjon
+        function add(number1 = 0, number2 = 0) {
+            const result = number1 + number2
+            return result
+        }
+
+        document.getElementById("result").innerHTML = add(3)
+
+        //Funksjon for å lage navnestreng
+        function personName(firstname, lastname, gender){
+            if(!firstname || !lastname) {
+                alert("Du må fylle ut fornavn og etternavn")
+            }
+            else {
+                let nameString = ""
+                if(gender === "female") { nameString += "Mrs. "}
+                if(gender === "male") {nameString += "Mr. "}
+                nameString += firstname[0] + ". " + lastname
+                return nameString 
+            }
+              
+        }
+
+        document.getElementById("person").innerHTML = personName("Marius", "AkerBæk", "male")
+
+        
+        
+    </script>
+</body>
+</html>

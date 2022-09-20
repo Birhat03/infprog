@@ -229,7 +229,7 @@
 
             // Oppgave 5: posisjonerte variabelen winnerDiv her istedet for at oppgave 5 skal fungere, uncaught reference error: Cannot access 'winnerDiv' before initialization
             const winnerDiv = document.getElementById("winner")
-            winnerDiv.style.display = "block"
+            
            
             
             
@@ -240,6 +240,7 @@
                     winner = "player"
                      //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
                      //Oppgave 7: satte winnerDiv i en timeout funksjon som gjør at winnerDiv vises etter 1 sekund når den blir aktivert 
+                     setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                      setTimeout(function(){ winnerDiv.innerHTML = "You win" }, 1000)
                     //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
                     //Oppgave 7: satte timeout når winnerDiven blir gull sånn at man ikke vet på forhånd at man vinner eller når man taper 
@@ -253,6 +254,7 @@
                 if(computerSign === "scissors") {
                     winner = "computer"
                     // Oppgave 5: endret strengen når man taper til "You lost"
+                    setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                    setTimeout(function(){winnerDiv.innerHTML = "You Lost"}, 1000) 
                    setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
                     winnerDiv.style.color = "#000000"
@@ -263,6 +265,7 @@
                 if(computerSign === "paper") {
                     winner = "undecided"
                     //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
+                    setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                     setTimeout(function(){winnerDiv.innerHTML = "It's a Tie"}, 1000)    
                     setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
                     winnerDiv.style.color = "#000000"
@@ -276,6 +279,7 @@
                 if(computerSign === "rock") {
                     winner = "undecided"
                     //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
+                    setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                     setTimeout(function(){winnerDiv.innerHTML = "It's a Tie"}, 1000)    
                     setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
                     winnerDiv.style.color = "#000000"
@@ -287,6 +291,7 @@
                     winner = "player"
                      //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
                      //Oppgave 7: satte winnerDiv i en timeout funksjon som gjør at winnerDiv vises etter 1 sekund når den blir aktivert 
+                     setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                      setTimeout(function(){ winnerDiv.innerHTML = "You win" }, 1000)
                     //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
                     setTimeout(function(){winnerDiv.style.backgroundColor = "#FFD700"}, 1000) 
@@ -298,6 +303,7 @@
                 if(computerSign === "paper") {
                     winner = "computer"
                     // Oppgave 5: endret strengen når man taper til "You lost"
+                    setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                    setTimeout(function(){winnerDiv.innerHTML = "You Lost"}, 1000) 
                    setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
                     winnerDiv.style.color = "#000000"
@@ -310,6 +316,7 @@
                 if(computerSign === "rock") {
                     winner = "computer"
                     // Oppgave 5: endret strengen når man taper til "You lost"
+                    setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                    setTimeout(function(){winnerDiv.innerHTML = "You Lost"}, 1000) 
                    setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
                     winnerDiv.style.color = "#000000"
@@ -320,6 +327,7 @@
                 if(computerSign === "scissors") {
                     winner = "undecided"
                     //Oppgave 5: endret strengen når det er uavgjort til "It's a tie"
+                    setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                     setTimeout(function(){winnerDiv.innerHTML = "It's a Tie"}, 1000)    
                     setTimeout(function(){winnerDiv.style.backgroundColor = "#006B5E"}, 1000) 
                     winnerDiv.style.color = "#000000"
@@ -331,6 +339,7 @@
                     winner = "player"
                      //Oppgave 5: endret strengen når man vinner til "you win" istedet når du vinner 
                      //Oppgave 7: satte winnerDiv i en timeout funksjon som gjør at winnerDiv vises etter 1 sekund når den blir aktivert 
+                     setTimeout(function(){ winnerDiv.style.display = "block"}, 1000)
                      setTimeout(function(){ winnerDiv.innerHTML = "You win" }, 1000)
                     //Oppgave 3: henta div med id="winner" og endra bakgrunnsfargen til gull når winner variabelen er lik player
                     setTimeout(function(){winnerDiv.style.backgroundColor = "#FFD700"}, 1000) 
