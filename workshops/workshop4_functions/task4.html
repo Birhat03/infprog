@@ -19,6 +19,18 @@
             <div id="points"><img src="img/points.png" /> <span id="points-count">0</span></div>
             <div id="level">Level: <span id="level-count">0</span></div>
         </section>
+        <section id="playarea">
+            <div>
+            <button type="button" onclick="modifyCoins(5)">Add 5 coins</button>
+            <button type="button" onclick="modifyCoins(-5)">Lose 5 coins</button>
+        </div>
+        <div>
+            <button type="button" onclick="modifyLife(1)">Gain 1 life</button>
+            <button type="button" onclick="modifyLife(-1)">Lose 1 life</button>
+            
+        </div>
+        <button type="button" onclick="restartGame()">Restart Game</button>
+        </section>
         <aside id="hud-inventory">
             <h3>Armory</h3>
             <table id="showhide">
@@ -30,6 +42,9 @@
     </div>
 
     <script>
+
+
+
         //WS3, OPPG1:
         const gameConfig = {
             playerName: "Hiof",
@@ -37,6 +52,47 @@
             lives: 3,
             level: 1
         }
+
+        function modifyCoins(coins){
+            gameConfig.coins = gameConfig.coins + coins
+            if (gameConfig.coins <= 0){
+            gameConfig.coins = 0
+            document.getElementById("coins-count").innerHTML = "Get some Coins"
+            }
+
+            else {
+            document.getElementById("coins-count").innerHTML = gameConfig.coins
+            }
+
+            modifyCoins(gameConfig.coins)
+        }
+
+        
+        function modifyLife(lives){
+            gameConfig.lives = gameConfig.lives + lives
+            document.getElementById("lives-count").innerHTML = gameConfig.lives
+            console.log(gameConfig.lives)
+        }
+
+        function modifyPoints (coins, armoryPoints){
+            let points = armoryPoints + (coins * 5)
+            document.getElementById("points-count").innerHTML = points
+        }
+
+        function restartGame () {
+            gameConfig.coins = 50
+            gameConfig.lives = 3
+            gameConfig.level = 1
+
+            document.getElementById("coins-count").innerHTML = gameConfig.coins
+            document.getElementById("points-count").innerHTML = gameConfig.coins
+            document.getElementById("level-count").innerHTML = gameConfig.level
+
+            for (const weapon of armory)
+            weapon.level = 1
+            console.log(weapon)
+        }
+
         //PLAYERNAME - INITITAL PRINT
         document.getElementById("playername").innerHTML = gameConfig.playerName
         
@@ -110,6 +166,11 @@
         //WS3, Oppg 6: Oppdatert points med verdi fra gameConfig-objektet og utregning via armoryPoints
         let points = (gameConfig.coins * 5) + armoryPoints
         document.getElementById("points-count").innerHTML = points
+
+       
+
+
+        
     </script>
 </body>
 </html>
