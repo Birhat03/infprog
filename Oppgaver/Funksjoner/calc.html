@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 4 - Minikalkulator</title>
+
+
+    <style>
+            .red {color: red;}
+    </style>
+</head>
+<body>
+        <ul id="result">
+
+        </ul>
+    
+    <script>
+            //deklarerer en funksjon som heter calculator med parametere num1 og num2 som har standardverdi 0
+            function calculator (num1 = 0, num2 = 0){
+                
+                // ga hver regning en variabel sånn at funksjonen regner ut alle disse verdiene 
+                let sumAdd = num1 + num2
+                let sumSub = num1 - num2
+                let sumMul = num1 * num2
+                let sumDiv = num1 / num2
+                                                    
+                //laget en betinget logikk inni li sånn at hvis tallet er under 0 så vil det få class="red" sånn at tallet blir rødt
+                document.getElementById("result").innerHTML = `
+                <li ${sumAdd < 0 ? `class="red"` : null}>${num1} + ${num2} = ${sumAdd}</li> 
+                <li ${sumSub < 0 ? `class="red"` : null}>${num1} - ${num2} = ${sumSub}</li> 
+                <li ${sumMul < 0 ? `class="red"` : null}>${num1} * ${num2} = ${sumMul}</li> 
+                <li${sumDiv < 0 ? `class="red"` : null}>${num1} / ${num2} = ${sumDiv}</li>`
+            }
+
+            calculator(2,3)
+    </script>
+</body>
+</html>

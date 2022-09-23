@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 1 - deklarere</title>
+</head>
+<body>
+
+    <p id="name"></p>
+    <p id="mail"></p>
+    
+    <script>
+
+        //deklarerer en funksjon som heter print 
+        function print(){
+
+            // og inni funksjonen så skal vi hente id'ene name og mail for å gi den tekstreng verdi "Birhat" og "birhatrm@hiof.no"
+            document.getElementById("name").innerHTML = "Birhat"
+            document.getElementById("mail").innerHTML = "birhatrm@hiof.no"
+        }
+
+        // Kjører funksjonen sånn at funksjonen skriver ut tekstrengene på HTML
+        print()
+
+    
+    </script>
+</body>
+</html>

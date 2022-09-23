@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 3 - parametere med standard verdi</title>
+</head>
+<body>
+
+        <p id="name"></p>
+        <p id="mail"></p>
+        <p id="age"></p>
+
+        <script>
+
+                // deklarerer en funksjon som heter print, med 3 parametere hvor name og email har standardverdier 
+                function print (name = "Navn ikke oppgitt", email = "Mail ikke oppgitt", age){
+                    document.getElementById("name").innerHTML = name
+                    document.getElementById("mail").innerHTML = email
+                /*Jeg bruker betinget logikk med operatoren "==" istedet for "===" , sånn at if else testen fungerer uavhengig av hvilken datatype det er.
+                 da kan jeg konvertere parameteren age til hvilket som helst datatype som streng eller number */
+                if (age == null){
+                    document.getElementById("age").innerHTML = "Alder ikke oppgitt"
+                }
+                else {
+                    document.getElementById("age").innerHTML = 2022 - age
+                }
+
+                }
+
+                /*Gir jeg parameterne verdi så vil det normalt skrives ut, 
+                (hvis man skriver ut age med tekststreng så vil det komme opp NaN som er not a number) 
+                Gir jeg ikke parameterne verdi så vil standardverdiene komme opp istedet    */
+                print()
+
+        </script>
+</body>
+</html>

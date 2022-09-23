@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 2 - parametere</title>
+</head>
+<body>
+    <p id="name"></p>
+    <p id="mail"></p>
+    <p id="age"></p>
+    
+    <script>
+
+            //deklarerer en funksjon og gir den tre forskjellige parametere (name, email, birthyear)
+            function print (name, email, birthyear){
+                document.getElementById("name").innerHTML = name
+                document.getElementById("mail").innerHTML = email
+                document.getElementById("age").innerHTML = 2022 - birthyear
+            }
+
+
+            //Kjører funksjonen og gir parameterene verdi
+            print("Birhat", "birhatrm@hiof.no", 2003)
+
+
+    </script>
+</body>
+</html>
