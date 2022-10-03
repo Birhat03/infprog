@@ -24,13 +24,13 @@
         //Sett opp Canvas:
         // Oppgave 1: getElementById er case sensitiv og y'en ble skrevet med stor bokstav, rettet det opp og gjore y'en til en liten y
         const canvas = document.getElementById("gamearea")
-        //Oppgave 2: Endret bredden og høyden til spillbrettet til 960 x 640 pixler
+        //Oppgave 3: Endret bredden og høyden til spillbrettet til 960 x 640 pixler
         canvas.width = 960; //64px ikoner * 11 ruter
         canvas.height = 640; //64px ikoner * 8 ruter
         const ctx = canvas.getContext("2d");
 
         //Gjør klar spillinformasjon
-        //Oppgave 2: Gjorde at spillet varer i 60 sekunder istendenfor 10 sekunder
+        //Oppgave 3: Gjorde at spillet varer i 60 sekunder istendenfor 10 sekunder
         let countdown = 60
         let iconsize = 64
         let gameOver = false
@@ -141,7 +141,7 @@
         ***************************************************************/
 
         //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
-        setInterval(countdownFunction, 100)
+        setInterval(countdownFunction, 1000)
 
         //Funksjon som tegner/fyller ut alle spill-elementene i canvas:
         function drawGameElements() {
