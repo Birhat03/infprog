@@ -22,6 +22,9 @@
         <ol id="points"></ol>
     </aside>
     <script>
+         // flyttet all kode inn i playGame funksjonen sånn at koder ikke dupliserer seg når spillet restarter
+          //Funksjon for start/restart spill
+          function playGame() {
         //Sett opp Canvas:
         // Oppgave 1: getElementById er case sensitiv og y'en ble skrevet med stor bokstav, rettet det opp og gjore y'en til en liten y
         const canvas = document.getElementById("gamearea")
@@ -30,8 +33,7 @@
         canvas.height = 640; //64px ikoner * 8 ruter
         const ctx = canvas.getContext("2d");
         
-        // flyttet all kode inn i playGame funksjonen sånn at koder ikke dupliserer seg når spillet restarter
-        function playGame() {
+       
         //Gjør klar spillinformasjon
         //Oppgave 2: Gjorde at spillet varer i 60 sekunder istendenfor 10 sekunder
         let countdown = 60
@@ -41,23 +43,23 @@
         const enemy = { }
         const zorber = { }
         let aliensCaught = 0;
-        let history = [{points: 0}] 
+        let history = [ ] 
         history.length < 1 ? document.getElementById("history").style.display = "none" : document.getElementById("history").style.display = "block"
 
         //Gjør klar bakgrunnsbilde for spiller
-        let playerLoaded = false;
+        let playerLoaded = true;
         const playerImage = new Image();
         playerImage.onload = () => { playerLoaded = true; }
         playerImage.src = "img/spaceship.png"
 
         //Gjør klar bakgrunnsbilde for alien
-        let enemyLoaded = false;
+        let enemyLoaded = true;
         const enemyImage = new Image();
         enemyImage.onload = () => { enemyLoaded = true; }
         enemyImage.src = "img/alien.png"
 
         //Oppgave 7: Gjør klar bakgrunnsbilde for zorber
-        let zorberLoaded = false;
+        let zorberLoaded = true;
         const zorberImage = new Image();
         zorberImage.onload = () => { zorberLoaded = true; }
         zorberImage.src = "img/zorber.png"
@@ -199,17 +201,7 @@
 
         // Cross-browser support for requestAnimationFrame (https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
         requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame;
-        
-        //Funksjon for start/restart spill
-        
-            //Startverdier
-            countdown = 60
-            gameOver = false
-            aliensCaught = 0
-            //Endret player/enemyLoaded til true sånn at karakterene loader opp når man trykker på onclick button
-            playerLoaded = true
-            enemyLoaded = true
-            zorberLoaded = true
+    
             //Tegne spill-elementer ved oppstart
             drawCharacters()
             renderGame()
@@ -223,15 +215,17 @@
                 countdown = 0
                 playerLoaded = false
                 enemyLoaded = false
-                zorberLoaded = false
+                zorberLoaded = false  
             } 
         } 
         
          //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
         setInterval(countdownFunction, 100)
         clearInterval(countdownFunction)
+
         }
 
+       
     </script>
 
 </body>
