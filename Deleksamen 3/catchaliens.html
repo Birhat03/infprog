@@ -29,14 +29,17 @@
         canvas.width = 960; //64px ikoner * 11 ruter
         canvas.height = 640; //64px ikoner * 8 ruter
         const ctx = canvas.getContext("2d");
-
+        
+        // flyttet all kode inn i playGame funksjonen sånn at koder ikke dupliserer seg når spillet restarter
+        function playGame() {
         //Gjør klar spillinformasjon
         //Oppgave 2: Gjorde at spillet varer i 60 sekunder istendenfor 10 sekunder
         let countdown = 60
         let iconsize = 64
         let gameOver = false
-        const player = { speed: 2 }
+        const player = { speed: 4 }
         const enemy = { }
+        const zorber = { }
         let aliensCaught = 0;
         let history = [{points: 0}] 
         history.length < 1 ? document.getElementById("history").style.display = "none" : document.getElementById("history").style.display = "block"
@@ -53,6 +56,12 @@
         enemyImage.onload = () => { enemyLoaded = true; }
         enemyImage.src = "img/alien.png"
 
+        //Oppgave 7: Gjør klar bakgrunnsbilde for zorber
+        let zorberLoaded = false;
+        const zorberImage = new Image();
+        zorberImage.onload = () => { zorberLoaded = true; }
+        zorberImage.src = "img/zorber.png"
+
         //Lag en funksjon som kjører i gang spillelementene
         //Plasser spilleren i midten av brettet, og fienden et vilkårlig sted innenfor spillbrettet
         function drawCharacters() {
@@ -60,6 +69,20 @@
             player.y = canvas.height / 2;
             enemy.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
             enemy.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
+            zorber.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
+            zorber.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
+        }
+
+        //eget funksjon som posisjonerer bare alien
+        function drawAlien(){
+            enemy.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
+            enemy.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
+        }
+
+        //Oppgave 7: eget funksjon som posisjonerer bare zorber 
+        function drawZorber(){
+            zorber.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
+            zorber.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
         }
         /************************************************************** 
          OPPGAVE 2 - KOMMENTAR 1
@@ -119,7 +142,18 @@
                 enemy.y <= (player.y + (iconsize / 2))
             ) {
                 aliensCaught++
-                drawCharacters()
+                drawAlien()
+            }
+
+            //Sjekk om player treffer zorber og får 3 poeng
+            if(
+                player.x <= (zorber.x + (iconsize / 2)) &&
+                player.y <= (zorber.y + (iconsize / 2)) &&
+                zorber.x <= (player.x + (iconsize / 2)) &&
+                zorber.y <= (player.y + (iconsize / 2))
+            ) {
+                aliensCaught += 3
+                drawZorber()
             }
         }
 
@@ -138,7 +172,12 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             playerLoaded ? ctx.drawImage(playerImage, player.x, player.y) : null
             enemyLoaded ? ctx.drawImage(enemyImage, enemy.x, enemy.y) : null
+            //Oppgave 7: funksjonen skal også tegne/fylle ut zorber
+            zorberLoaded ? ctx.drawImage(zorberImage, zorber.x, zorber.y) : null
             gameOver ? ctx.fillText("GAME OVER!", 300, 200) : null
+            //Oppgave 4: får knappen til å bli synlig igjen når det er gameover ellers så er knappen borte. Teksten endrer seg også til "Play again" etter første gameover
+            gameOver ? document.getElementById("buttonPlay").style.display = "block" : document.getElementById("buttonPlay").style.display = "none"
+            gameOver ? document.getElementById("buttonPlay").innerText = "Play again" : null
             //Oppgave 3: Gjorde game over fonten til 60px stor med Space Mono font og gjøre teksten rød. Skrev inn textAlign property til center for å få teksten i midten
             ctx.font = "60px Space Mono"
             ctx.fillStyle = "red"
@@ -162,37 +201,37 @@
         requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame;
         
         //Funksjon for start/restart spill
-        function playGame() {
+        
             //Startverdier
             countdown = 60
             gameOver = false
             aliensCaught = 0
-            //Oppgave 4: får knappen til å forsvinne når spillet starter
-            document.getElementById("buttonPlay").style.display = "none";
             //Endret player/enemyLoaded til true sånn at karakterene loader opp når man trykker på onclick button
             playerLoaded = true
             enemyLoaded = true
+            zorberLoaded = true
             //Tegne spill-elementer ved oppstart
             drawCharacters()
             renderGame()
-            //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
-        setInterval(countdownFunction, 1000)
+            drawAlien()
+            drawZorber()
               //Lag funksjon for nedtelling
         function countdownFunction() {
             countdown--
             if(countdown <= 0) {
-                clearInterval(countdownFunction)
                 gameOver = true
-                //Oppgave 4: Gjør knappen synlig igjen og teksten blir endret til Play again
-                document.getElementById("buttonPlay").style.display = "block";
-                document.getElementById("buttonPlay").innerText = "Play again"
                 countdown = 0
                 playerLoaded = false
                 enemyLoaded = false
+                zorberLoaded = false
             } 
         } 
-        }
         
+         //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
+        setInterval(countdownFunction, 100)
+        clearInterval(countdownFunction)
+        }
+
     </script>
 
 </body>
