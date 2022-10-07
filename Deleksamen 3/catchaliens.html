@@ -39,12 +39,13 @@
         let countdown = 60
         let iconsize = 64
         let gameOver = false
+        //Oppgave 3: jeg syns at speed med verdi 4 er en fornuftig speed istedenfor 250
         const player = { speed: 4 }
         const enemy = { }
         const zorber = { }
         let aliensCaught = 0;
         let history = [ ] 
-        history.length < 1 ? document.getElementById("history").style.display = "none" : document.getElementById("history").style.display = "block"
+        
 
         //Gjør klar bakgrunnsbilde for spiller
         let playerLoaded = true;
@@ -71,11 +72,12 @@
             player.y = canvas.height / 2;
             enemy.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
             enemy.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
+            //Oppgave 7: lagt til zorber, sånn at det også posisjonerer zorber innenfor spillbrettet
             zorber.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
             zorber.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
         }
 
-        //eget funksjon som posisjonerer bare alien
+        //Oppgave 7: eget funksjon som posisjonerer bare alien
         function drawAlien(){
             enemy.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
             enemy.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
@@ -224,8 +226,8 @@
         clearInterval(countdownFunction)
 
         }
-
-       
+        
+     //  history.length < 1 ? document.getElementById("history").style.display = "none" : document.getElementById("history").style.display = "block"
     </script>
 
 </body>
