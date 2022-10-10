@@ -12,9 +12,8 @@
         <p>Time left: <span id="time">60</span> Aliens caught: <span id="points">0</span></p>
     </header>
     <section>
-       
         <canvas id="gamearea"></canvas>
-        <!--Oppgave 4: laget en knapp under spillområdet med onclick metoden som har funksjonen playgame som verdi. 
+         <!--Oppgave 4: laget en knapp over spillområdet med onclick metoden som har funksjonen playgame som verdi. 
         Det gjør at funskjonen starter når button blir clicka på. Ga også id="buttonPlay" sånn at jeg kunne hente denne som id i scripten min-->
         <button onclick="playGame()" id="buttonPlay" >Play</button>
     </section>
@@ -22,7 +21,7 @@
     <a href="https://www.flaticon.com/free-icons/spaceship" title="spaceship icons">Spaceship icons created by Freepik</a> - Flaticon</p>
     <aside id="history">
         <h2>Stats</h2>
-        <ol id="points"></ol>
+        <ol id="points"></ol> 
     </aside>
     <script>
          // flyttet all kode inn i playGame funksjonen sånn at koder ikke dupliserer seg når spillet restarter
@@ -236,7 +235,7 @@
         //Lag funksjon for nedtelling
         //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
         // gjorde intervallet til en variabel sånn at clearInterval funksjonen funka: https://stackoverflow.com/questions/16599878/can-clearinterval-be-called-inside-setinterval
-        const timer = setInterval(countdownFunction, 100)
+        const timer = setInterval(countdownFunction, 1000)
         function countdownFunction() {
             countdown--
             if(countdown <= 0) {
@@ -248,8 +247,8 @@
                 zorberLoaded = false 
                 clearInterval(timer)
                 /*Oppgave 5: bruker map med parameter antall som skriver ut liste som bruker points objektet og 
-                plusser med alienscaught for å få antallet alien fanget den runden*/
-                history.map(antall => document.getElementById("history").innerHTML += `<li>Aliens Catched: ${antall.points + aliensCaught}</li>`) 
+                plusser med alienscaught for å få antallet alien fanget den runden. Skrev inn type="1" i li sånn at det skal oppføre seg som om den faktisk er i en ol tag*/
+                history.map(antall => document.getElementById("history").innerHTML += `<li type="1">Attempt: ${antall.points + aliensCaught} Points</li>`) 
             } 
         }
         }
