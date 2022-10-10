@@ -35,7 +35,7 @@
         
        
         //Gjør klar spillinformasjon
-        //Oppgave 2: Gjorde at spillet varer i 60 sekunder istendenfor 10 sekunder
+        //Oppgave 3: Gjorde at spillet varer i 60 sekunder istendenfor 10 sekunder
         let countdown = 60
         let iconsize = 64
         let gameOver = false
@@ -44,8 +44,9 @@
         const enemy = { }
         const zorber = { }
         let aliensCaught = 0;
-        let history = [ ] 
-        
+        //Oppgave 5: la til objekt i arrayen points med verdi 0
+        let history = [{points: 0} ] 
+        history.length < 1 ? document.getElementById("history").style.display = "none" : document.getElementById("history").style.display = "block"
 
         //Gjør klar bakgrunnsbilde for spiller
         let playerLoaded = true;
@@ -217,17 +218,21 @@
                 countdown = 0
                 playerLoaded = false
                 enemyLoaded = false
-                zorberLoaded = false  
+                zorberLoaded = false 
+                /*Oppgave 5: bruker map med parameter antall som skriver ut liste som bruker points objektet og 
+                plusser med alienscaught for å få antallet alien fanget den runden*/
+                /*koden her funker som regel og skriver ut antall points hver runde men det dupliserer seg pga interval, har testet med clearInterval men funker ikke,
+                er ikke sikker på hvorfor, så jeg lot det bare være sånn */
+                history.map(antall => document.getElementById("history").innerHTML += `<li>Points: ${antall.points + aliensCaught}</li>`) 
             } 
-        } 
-        
+        }
+     
+         
          //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
         setInterval(countdownFunction, 100)
         clearInterval(countdownFunction)
-
         }
         
-     //  history.length < 1 ? document.getElementById("history").style.display = "none" : document.getElementById("history").style.display = "block"
     </script>
 
 </body>
