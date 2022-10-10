@@ -12,8 +12,11 @@
         <p>Time left: <span id="time">60</span> Aliens caught: <span id="points">0</span></p>
     </header>
     <section>
-        <button onclick="playGame()" id="buttonPlay" >Play</button>
+       
         <canvas id="gamearea"></canvas>
+        <!--Oppgave 4: laget en knapp under spillområdet med onclick metoden som har funksjonen playgame som verdi. 
+        Det gjør at funskjonen starter når button blir clicka på. Ga også id="buttonPlay" sånn at jeg kunne hente denne som id i scripten min-->
+        <button onclick="playGame()" id="buttonPlay" >Play</button>
     </section>
     <p><a href="https://www.flaticon.com/free-icons/alien" title="alien icons">Alien icon created by Smashicons</a>, 
     <a href="https://www.flaticon.com/free-icons/spaceship" title="spaceship icons">Spaceship icons created by Freepik</a> - Flaticon</p>
@@ -33,19 +36,19 @@
         canvas.height = 640; //64px ikoner * 8 ruter
         const ctx = canvas.getContext("2d");
         
-       
         //Gjør klar spillinformasjon
         //Oppgave 3: Gjorde at spillet varer i 60 sekunder istendenfor 10 sekunder
         let countdown = 60
         let iconsize = 64
         let gameOver = false
-        //Oppgave 3: jeg syns at speed med verdi 4 er en fornuftig speed istedenfor 250
-        const player = { speed: 4 }
+        //Oppgave 3: jeg syns at speed med verdi 5 er en mer fornuftig speed istedenfor 250, siden jeg ikke fant noe annet fornuftig måte å gjøre speeden til 250
+        const player = { speed: 5 }
         const enemy = { }
+        //Oppgave 7: Gjorde klar en zorber variabel med et tomt objekt
         const zorber = { }
         let aliensCaught = 0;
-        //Oppgave 5: la til objekt i arrayen points med verdi 0
-        let history = [{points: 0} ] 
+        //Oppgave 5: la til objekt i arrayen som heter points med verdi 0
+        let history = [{points: 0} ]
         history.length < 1 ? document.getElementById("history").style.display = "none" : document.getElementById("history").style.display = "block"
 
         //Gjør klar bakgrunnsbilde for spiller
@@ -60,7 +63,7 @@
         enemyImage.onload = () => { enemyLoaded = true; }
         enemyImage.src = "img/alien.png"
 
-        //Oppgave 7: Gjør klar bakgrunnsbilde for zorber
+        //Oppgave 7: Gjør klar bilde object for zorber
         let zorberLoaded = true;
         const zorberImage = new Image();
         zorberImage.onload = () => { zorberLoaded = true; }
@@ -78,17 +81,17 @@
             zorber.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
         }
 
-        //Oppgave 7: eget funksjon som posisjonerer bare alien
+        /*Oppgave 7: lagde en funksjon som heter drawAlien posisjonerer bare alien og det samme for zorber, sånn at det skal fungere hver for seg. Tegne opp en ny alien
+         når man tar alien og en ny zorber når man tar en zorber   */
         function drawAlien(){
             enemy.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
             enemy.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
         }
-
-        //Oppgave 7: eget funksjon som posisjonerer bare zorber 
         function drawZorber(){
             zorber.x = (iconsize / 2) + (Math.random() * (canvas.width - iconsize));
             zorber.y = (iconsize / 2) + (Math.random() * (canvas.height - iconsize));
         }
+
         /************************************************************** 
          OPPGAVE 2 - KOMMENTAR 1
          Forklar hva de fire linjene i funksjonen drawCharacters() gjør
@@ -122,6 +125,7 @@
             if(event.key === "ArrowUp") { up = false } 
             if(event.key === "ArrowDown") { down = false } 
         }
+
         /************************************************************** 
          OPPGAVE 2 - KOMMENTAR 2
          Forklar hvorfor vi trenger å sjekke både når en knapp er trykket ned,
@@ -147,30 +151,31 @@
                 enemy.y <= (player.y + (iconsize / 2))
             ) {
                 aliensCaught++
+                //Oppgave 7: tegner en ny alien sånn at det tegner ut en ny alien når spilleren fanger den 
                 drawAlien()
             }
 
-            //Sjekk om player treffer zorber og får 3 poeng
+            //Oppgave 7: Sjekk om player treffer zorber og får 3 poeng.
             if(
                 player.x <= (zorber.x + (iconsize / 2)) &&
                 player.y <= (zorber.y + (iconsize / 2)) &&
                 zorber.x <= (player.x + (iconsize / 2)) &&
                 zorber.y <= (player.y + (iconsize / 2))
             ) {
+                //Oppgave 7: aliensCaught inkrementeres med 3 når spilleren treffer zorber. Zorber blir verdt 3 poeng
                 aliensCaught += 3
+                //Oppgave 7: kjører funksjonen drawZorber sånn at det tegner ut en ny zorber når spilleren fanger den
                 drawZorber()
             }
         }
-
       
         /************************************************************** 
          OPPGAVE 2 - KOMMENTAR 3
          Forklar hva linjene i funksjonen countDownFunction() gjør
-         - countdown-- gjør at variabelen dekrementerer seg eller subtraherer seg med 1 og har betinget logikk der hvis countdown kommer seg til 0 eller mindre så får countdownFunction en clearInterval funksjon
-          som gjør at intervallen stopper og countdown forblir null og gameover variabelen blir true. og player og enemyLoaded blir false og forsvinner ut av canvas-
+         - countdown-- gjør at variabelen dekrementerer seg eller subtraherer seg med 1 og har betinget logikk der hvis countdown kommer seg til 0 eller 
+         mindre så får countdownFunction en clearInterval funksjon som gjør at intervallen stopper og countdown forblir null og gameover variabelen blir true. 
+         og player og enemyLoaded blir false og forsvinner ut av canvas -
         ***************************************************************/
-
-       
 
         //Funksjon som tegner/fyller ut alle spill-elementene i canvas:
         function drawGameElements() {
@@ -180,20 +185,37 @@
             //Oppgave 7: funksjonen skal også tegne/fylle ut zorber
             zorberLoaded ? ctx.drawImage(zorberImage, zorber.x, zorber.y) : null
             gameOver ? ctx.fillText("GAME OVER!", 300, 200) : null
-            //Oppgave 4: får knappen til å bli synlig igjen når det er gameover ellers så er knappen borte. Teksten endrer seg også til "Play again" etter første gameover
+            /* Oppgave 4: hentet id'en buttonplay og får button til å bli synlig igjen når det er gameover ellers så er knappen borte når spillet starter 
+            fordi da er gameover false. Teksten endrer seg også til "Restart" etter første gameover */
             gameOver ? document.getElementById("buttonPlay").style.display = "block" : document.getElementById("buttonPlay").style.display = "none"
-            gameOver ? document.getElementById("buttonPlay").innerText = "Play again" : null
+            gameOver ? document.getElementById("buttonPlay").innerText = "Restart" : null
             //Oppgave 3: Gjorde game over fonten til 60px stor med Space Mono font og gjøre teksten rød. Skrev inn textAlign property til center for å få teksten i midten
             ctx.font = "60px Space Mono"
             ctx.fillStyle = "red"
             ctx.textAlign = "center"
             document.getElementById("time").innerHTML = countdown
             document.getElementById("points").innerHTML = aliensCaught
+
+            //Oppgave 6: Kollisjonsjekk
+            // Hvis player kommer seg til x akse i 0 altså mot venstre så skal player.x holde seg til 0 sånn at det ikke beveger seg mer enn den verdien
+            if (player.x < 0){
+                player.x = 0
+
+            }
+            // Hvis player kommer seg til den maksimale bredden til spillbrettet minus iconsize som er 64 så skal det holde seg til det. 
+            // Man subtraherer med iconsize sånn at romskipet kolliderer fra sin høyre side
+            if (player.x > canvas.width - iconsize){
+                player.x = canvas.width - iconsize
+            }
+            // det samme skjer med y aksen der hvis den kommer til 0 på y aksen som er oppe så skal den holde seg til den verdien.
+            if (player.y < 0){
+                player.y = 0
+            }
+            //Her skal det også subtraheres med iconsize sånn at det skal kollidere underifra romskipet. Iconsize er 64x64 så det gjelder samme variabel(iconsize) her
+            if(player.y > canvas.height - iconsize){
+                player.y = canvas.height - iconsize
+            }
         }
-
-        
-        
-
         //Funksjon som kjører spillet
         // Oppgave 1: Funksjonen nedenfor hadde skrive feil, rettet det opp
         function renderGame() {
@@ -201,16 +223,20 @@
             drawGameElements()
             requestAnimationFrame(renderGame)
         }
-
         // Cross-browser support for requestAnimationFrame (https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
         requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame;
     
             //Tegne spill-elementer ved oppstart
             drawCharacters()
             renderGame()
+            //Oppgave 7: få alien og zorber til å bli tegnet opp ved spillets start, ved å kjøre deres funksjoner
             drawAlien()
             drawZorber()
-              //Lag funksjon for nedtelling
+
+        //Lag funksjon for nedtelling
+        //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
+        // gjorde intervallet til en variabel sånn at clearInterval funksjonen funka: https://stackoverflow.com/questions/16599878/can-clearinterval-be-called-inside-setinterval
+        const timer = setInterval(countdownFunction, 100)
         function countdownFunction() {
             countdown--
             if(countdown <= 0) {
@@ -218,21 +244,17 @@
                 countdown = 0
                 playerLoaded = false
                 enemyLoaded = false
+                //Oppgave 7: la til zorberLoaded = false også sånn at den også forsvinner når det telleren er 0 og det er gameover 
                 zorberLoaded = false 
+                clearInterval(timer)
                 /*Oppgave 5: bruker map med parameter antall som skriver ut liste som bruker points objektet og 
                 plusser med alienscaught for å få antallet alien fanget den runden*/
-                /*koden her funker som regel og skriver ut antall points hver runde men det dupliserer seg pga interval, har testet med clearInterval men funker ikke,
-                er ikke sikker på hvorfor, så jeg lot det bare være sånn */
-                history.map(antall => document.getElementById("history").innerHTML += `<li>Points: ${antall.points + aliensCaught}</li>`) 
+                history.map(antall => document.getElementById("history").innerHTML += `<li>Aliens Catched: ${antall.points + aliensCaught}</li>`) 
             } 
         }
-     
-         
-         //Kjør funksjonen for nedtelling hver sekund (1000. milisekund)
-        setInterval(countdownFunction, 100)
-        clearInterval(countdownFunction)
         }
-        
+        //Oppgave 4: fjernet kodelinje som starter opp spillet direkte
+        // playgame()
     </script>
 
 </body>
