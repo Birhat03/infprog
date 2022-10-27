@@ -10,8 +10,8 @@
 
 
 
-            #animarea{
-                display: flex;
+            #gamearea-canvas{
+                display: block;
                 background: black;
                 margin: auto;
             }
@@ -29,7 +29,7 @@
             <div id="points"><img src="img/points.png" /> <span id="points-count">0</span></div>
             <div id="level">Level: <span id="level-count">0</span></div>
         </section>
-        <canvas id="animarea"></canvas>
+        <canvas id="gamearea-canvas"></canvas>
         <aside id="hud-inventory">
             <h3>Armory</h3>
             <table id="showhide">
@@ -41,46 +41,7 @@
     </div>
 
     <script>
-        //gjør klar canvas:
-        const canvas = document.getElementById("animarea")
-        canvas.width = 800
-        canvas.height = 600
-        const ctx = canvas.getContext("2d")
-
-        //Funksjon for random verdi:
-        function randomMinMax(min,max){
-        return Math.floor(Math.random() * (max - min + 1) + min)
-        }
-
-        //Oppgave 2: Tegn fiende
-        //firkant
-        ctx.fillStyle = "green"
-        //Mathfloor henter random verdi fra 0 til 540 (altså canvas.height minus høyden av firkanten som er 60)
-        //kode hentet fra: https://www.w3schools.com/js/tryit.asp?filename=tryjs_random_0_10
-        ctx.fillRect(0, Math.floor(Math.random() * (canvas.height - 60)), 20, 60)
-
-
-        //Oppgave 3: bevege fienden
-        const enemy = {
-            fillcolor: "#B61010",
-            width: 20,
-            height: 60
-        }
-
-        let x = 0
-        let y = 0
-
-        function drawRect() {
-            ctx.beginPath()
-            ctx.fillStyle = enemy.fillcolor
-            ctx.fillRect(x, Math.floor(Math.random() * (canvas.height - enemy.height)), enemy.width, enemy.height)
-            ctx.closePath()
-        }
-
-
-        drawRect()
-  
-
+    
         //WS3, OPPG1:
         const gameConfig = {
             playerName: "Hiof",
@@ -161,6 +122,85 @@
         //WS3, Oppg 6: Oppdatert points med verdi fra gameConfig-objektet og utregning via armoryPoints
         let points = (gameConfig.coins * 5) + armoryPoints
         document.getElementById("points-count").innerHTML = points
+            // w5 oppgave 1: gjør klar canvas:
+            const canvas = document.getElementById("gamearea-canvas")
+        canvas.width = 800
+        canvas.height = 600
+        const ctx = canvas.getContext("2d")
+
+        //Funksjon for random verdi:
+        function randomMinMax(min,max){
+        return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        //Oppgave 2: Tegn fiende
+        //Mathfloor henter random verdi fra 0 til 540 (altså canvas.height minus høyden av firkanten som er 60)
+        //kode hentet fra: https://www.w3schools.com/js/tryit.asp?filename=tryjs_random_0_10
+       //ctx.fillRect(0, Math.floor(Math.random() * (canvas.height - 60)), 20, 60)
+        function randomMinMax(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        //Oppgave 3: bevege fienden
+        const enemy = {
+            width: 20,
+            height: 60,
+            x: 0,
+            y: randomMinMax(0, canvas.height - 60),
+            color: "#B61010" 
+        }
+       
+       
+        function drawEnemy() {
+            ctx.beginPath()
+             ctx.fillStyle = enemy.color
+             ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height)
+            ctx.closePath()
+        }
+
+        //W5 Oppgave 5:
+        const coinRadius = 5
+        const coinsArray = []
+        //for-løkke for å dytte fem mynt-posisjoner inn i arrayen
+        for(let teller = 1; teller <= 5; teller++) {
+            coinsArray.push({
+                x: randomMinMax(coinRadius, canvas.width - coinRadius), 
+                y: randomMinMax(coinRadius, canvas.height - coinRadius)
+            })
+        }
+
+        console.log(coinsArray)
+
+        function drawElements() {
+            //Tømme canvas:
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            //Tegne fienden
+            drawEnemy()
+            //Oppdater fiendens x-verdi:
+            enemy.x = enemy.x + 1
+                //Oppgave 4:
+        if(enemy.x >= canvas.width){
+            enemy.x = 0
+            enemy.y = randomMinMax(0, canvas.height - enemy.height)
+        }
+
+            requestAnimationFrame(drawElements)
+
+            //Tegne opp mynter
+            coinsArray.map(pos => {
+                ctx.beginPath()
+                ctx.fillStyle = "gold"
+                ctx.arc(pos.x, pos.y, coinRadius, 0, 2 * Math.PI)
+                ctx.fill()
+                ctx.closePath()  
+                
+                //Kollisjonsjekk mynter og oppdaterer poeng/pengeteller:
+            })
+        }
+
+    
+        drawElements()
+
     </script>
 </body>
 </html>
