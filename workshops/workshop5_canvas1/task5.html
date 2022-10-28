@@ -45,21 +45,25 @@
         //WS3, OPPG1:
         const gameConfig = {
             playerName: "Hiof",
-            coins: 50,
+            coins: 0,
             lives: 3,
-            level: 1
+            level: 1,
+            canLooseLife: true
         }
         //PLAYERNAME - INITITAL PRINT
         document.getElementById("playername").innerHTML = gameConfig.playerName
         
         //COINS - INITIAL PRINT
-        let coinsPrint = ""
+        function coinPrint(){
+            let coinsPrint = ""
         if(gameConfig.coins > 0) {
             coinsPrint = gameConfig.coins
         } else {
             coinsPrint = "Collect some coins"
         }
         document.getElementById("coins-count").innerHTML = coinsPrint
+        }
+       
         
         //LIVES - INITIAL PRINT
         const livesPrint = document.getElementById("lives-count")
@@ -120,8 +124,11 @@
 
         //POINTS - INITIAL PRINT
         //WS3, Oppg 6: Oppdatert points med verdi fra gameConfig-objektet og utregning via armoryPoints
-        let points = (gameConfig.coins * 5) + armoryPoints
+        function updatePoints(){
+            let points = (gameConfig.coins * 5) + armoryPoints
         document.getElementById("points-count").innerHTML = points
+        }
+
             // w5 oppgave 1: gjør klar canvas:
             const canvas = document.getElementById("gamearea-canvas")
         canvas.width = 800
@@ -149,7 +156,41 @@
             y: randomMinMax(0, canvas.height - 60),
             color: "#B61010" 
         }
+
+        const hero = {
+            color: "lime",
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 20,
+            speed: 2
+        }
        
+        function drawHero(){
+            ctx.beginPath()
+            ctx.fillStyle = hero.color
+            ctx.arc(hero.x, hero.y, hero.radius, 0, 2 * Math.PI)
+            ctx.fill()
+            ctx.closePath()
+        }
+
+        let left = false
+        let right = false
+        let up = false
+        let down = false
+
+        function checkPressedButton(event){
+            event.key === "w" ? up = true : null
+            event.key === "s" ? down = true : null
+            event.key === "a" ? left = true : null
+            event.key === "d" ? right = true : null
+        }
+
+        document.addEventListener("keyup", event => {
+            event.key === "w" ? up = false : null
+            event.key === "s" ? down = false : null
+            event.key === "a" ? left = false : null
+            event.key === "d" ? right = false : null
+        })
        
         function drawEnemy() {
             ctx.beginPath()
@@ -184,7 +225,34 @@
             enemy.y = randomMinMax(0, canvas.height - enemy.height)
         }
 
-            requestAnimationFrame(drawElements)
+          
+
+            //Tegn helt
+            drawHero()
+            //flytt helt
+            up ? hero.y = hero.y - hero.speed : null
+            down ? hero.y = hero.y + hero.speed : null
+            left ? hero.x = hero.x - hero.speed : null
+            right ? hero.x = hero.x + hero.speed : null
+
+
+            //W6,3:
+            if(
+                hero.x + hero.radius > enemy.x &&
+                hero.x - hero.radius < enemy.x + enemy.width &&
+                hero.y - hero.radius < enemy.y + enemy.height &&
+                hero.y + hero.radius > enemy.y
+            ) {
+                if(gameConfig.canLooseLife === true){
+                gameConfig.lives = gameConfig.lives - 1
+                document.getElementById("lives-count").innerHTML = gameConfig.lives
+                
+            }
+                gameConfig.canLooseLife = false
+            } 
+            else {
+                    gameConfig.canLooseLife = true
+            }
 
             //Tegne opp mynter
             coinsArray.map(pos => {
@@ -195,9 +263,34 @@
                 ctx.closePath()  
                 
                 //Kollisjonsjekk mynter og oppdaterer poeng/pengeteller:
-            })
-        }
+                if(
+                    pos.x - coinRadius < hero.x + hero.radius &&
+                    pos.x + coinRadius > hero.x - hero.radius &&
+                    pos.y - coinRadius < hero.y + hero.radius &&
+                    pos.x + coinRadius > hero.y - hero.radius
+                    ){
+                        console.log("coin pickkkkkk")
+                        pos.x = randomMinMax(coinRadius, canvas.width - coinRadius)
+                        pos.y = randomMinMax(coinRadius, canvas.height - coinRadius)
+                        gameConfig.coins = gameConfig.coins + 1
+                        
 
+                    }
+            })
+
+            if (gameConfig.lives === 0){
+                    ctx.font = "60px Arial"
+                    ctx.fillStyle = "red"
+                    ctx.fillText("Game Over", canvas.width / 2 - 200, 250)
+                    document.removeEventListener("keydown", checkPressedButton)
+                    gameConfig.canLooseLife = false
+                }
+
+                updatePoints()
+                coinPrint()
+                
+            requestAnimationFrame(drawElements)
+        }
     
         drawElements()
 
