@@ -30,7 +30,7 @@
             let textArea = document.getElementById("text")
 
             //TODO: Ensure correct capitalization of text string fetched
-            const capital = " "
+            const capital = allowedCharacters.toUpperCase()
 
             //TODO: Make capitalized text string into array
              const capitalArray = Array.from(capital)
@@ -42,11 +42,11 @@
             /* TODO:
              * 1) Go through array of characters
              */
-                capitalArray.map(word => { emptyText += `<img src="images/${word}.png">`} )
+                capitalArray.forEach(function(word){emptyText += `<img src="images/${word}.png">`})
              /* 2) Check if capitalized array character is allowed:
              *    If it is, put HTML for image output into variable for HTML.
              */ 
-                if(capital === allowedCharactersArray){
+                if(textArea.value === capital){
                     document.getElementById("ransom-note").innerHTML = emptyText
                 }
 
