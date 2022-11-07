@@ -27,31 +27,44 @@
         //Create function to run on button click
         function makeRansom() {
             //TODO: Fetch text from textarea
-            
+            let textArea = document.getElementById("text")
 
             //TODO: Ensure correct capitalization of text string fetched
+            const capital = " "
 
             //TODO: Make capitalized text string into array
+             const capitalArray = Array.from(capital)
             
             
             //TODO: Prepare empty string variable for HTML
-           
+            let emptyText = ""
 
             /* TODO:
              * 1) Go through array of characters
-             * 2) Check if capitalized array character is allowed:
+             */
+                capitalArray.map(word => { emptyText += `<img src="images/${word}.png">`} )
+             /* 2) Check if capitalized array character is allowed:
              *    If it is, put HTML for image output into variable for HTML.
-             *    If not, put the character from the array into variable for HTML.
-             * Rules to ALSO check: 
+             */ 
+                if(capital === allowedCharactersArray){
+                    document.getElementById("ransom-note").innerHTML = emptyText
+                }
+
+
+             /*    If not, put the character from the array into variable for HTML.
+             */
+                    
+             /* Rules to ALSO check: 
              *    1) If character in array is a period (.), question mark (?), or exclamation mark (!),
              *       use the end.png-file (image of exclamation mark)
              *    2) If character is a space, insert <span class="space-separator"></span> into variabel for HTML
              * */
-            
 
             //TODO: Write HTML output to #ransom-note
             
         }
+        
+        
     </script>
 </body>
 </html>
