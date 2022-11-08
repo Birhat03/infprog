@@ -23,30 +23,49 @@
         //Prepare array with allowed characters
         const allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         const allowedCharactersArray = Array.from(allowedCharacters)
+        const marks = "!.?"
+        const marksArray = Array.from(marks)
+        console.log(marksArray)
 
         //Create function to run on button click
         function makeRansom() {
             //TODO: Fetch text from textarea
-            let textArea = document.getElementById("text")
+            let textArea = document.getElementById("text").value
+            console.log(textArea)
 
             //TODO: Ensure correct capitalization of text string fetched
-            const capitalized = false
+            const capitalized = textArea.toUpperCase()
+            console.log(capitalized)
 
             //TODO: Make capitalized text string into array
             const capitalizedArray = Array.from(capitalized)
-            
+            console.log(capitalizedArray)
             
             //TODO: Prepare empty string variable for HTML
             let emptyText = ""
+            let markText = ""
+          
 
             /* TODO:
              * 1) Go through array of characters
              */
-             // allowedCharactersArray.map(word => textArea += `<img src="images/${word}.png">` )
+             
+              capitalizedArray.map((textinput) => {emptyText += `<img src="images/${textinput}.png">`})
+              capitalizedArray.map((mark) => {markText += `<img src="images/end.png">`})
              /* 2) Check if capitalized array character is allowed:
              *    If it is, put HTML for image output into variable for HTML.
              */ 
-      
+            
+                if(capitalizedArray.textinput == allowedCharactersArray.word){
+                    document.getElementById("ransom-note").innerHTML = emptyText
+                    
+                }
+
+                if(capitalizedArray.mark == marksArray.marks){
+                    document.getElementById("ransom-note").innerHTML += markText
+                }
+                
+
              /*    If not, put the character from the array into variable for HTML.
              */
                     
@@ -55,7 +74,8 @@
              *       use the end.png-file (image of exclamation mark)
              *    2) If character is a space, insert <span class="space-separator"></span> into variabel for HTML
              * */
-            
+
+
             //TODO: Write HTML output to #ransom-note
             
         }
