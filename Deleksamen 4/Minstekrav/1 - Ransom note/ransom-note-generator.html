@@ -30,10 +30,10 @@
             let textArea = document.getElementById("text")
 
             //TODO: Ensure correct capitalization of text string fetched
-            const capital = allowedCharacters.toUpperCase()
+            const capitalized = false
 
             //TODO: Make capitalized text string into array
-             const capitalArray = Array.from(capital)
+            const capitalizedArray = Array.from(capitalized)
             
             
             //TODO: Prepare empty string variable for HTML
@@ -42,15 +42,11 @@
             /* TODO:
              * 1) Go through array of characters
              */
-                capitalArray.forEach(function(word){emptyText += `<img src="images/${word}.png">`})
+             // allowedCharactersArray.map(word => textArea += `<img src="images/${word}.png">` )
              /* 2) Check if capitalized array character is allowed:
              *    If it is, put HTML for image output into variable for HTML.
              */ 
-                if(textArea.value === capital){
-                    document.getElementById("ransom-note").innerHTML = emptyText
-                }
-
-
+      
              /*    If not, put the character from the array into variable for HTML.
              */
                     
@@ -59,7 +55,7 @@
              *       use the end.png-file (image of exclamation mark)
              *    2) If character is a space, insert <span class="space-separator"></span> into variabel for HTML
              * */
-
+            
             //TODO: Write HTML output to #ransom-note
             
         }
