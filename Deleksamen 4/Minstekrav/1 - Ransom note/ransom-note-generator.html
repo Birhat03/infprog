@@ -23,69 +23,55 @@
         //Prepare array with allowed characters
         const allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         const allowedCharactersArray = Array.from(allowedCharacters)
-        
-        const marks = "!"
-        const marking = ["end"]
+        const marks = "!.?"
         const marksArray = Array.from(marks)
-        console.log(marksArray)
-        const space = " "
-        const spaceArray = Array.from(space)
-        console.log(spaceArray)
+  
+     
         //Create function to run on button click
         function makeRansom() {
             //TODO: Fetch text from textarea
             let textArea = document.getElementById("text").value
-            console.log(textArea)
+
 
             //TODO: Ensure correct capitalization of text string fetched
             const capitalized = textArea.toUpperCase()
-            console.log(capitalized)
 
             //TODO: Make capitalized text string into array
             const capitalizedArray = Array.from(capitalized)
-            console.log(capitalizedArray)
             
             //TODO: Prepare empty string variable for HTML
             let emptyText = ""
-            let markText = ""
-            let spaceText = ""
+
             /* TODO:
              * 1) Go through array of characters
              */
-                                                                            // onerror='this.style.display = "none"' 
-              capitalizedArray.map( textinput => emptyText += `<img // onerror='this.style.display = "none"' src="images/${textinput}.png">`)
-              // marksArray.map( markinput => emptyText += '<img src="images/end.png">')
-              // spaceArray.map( spacing => emptyText += '<span class="space-separator"></span>')
              
+              capitalizedArray.map((textinput) => {emptyText += `<img src="images/${textinput}.png">`})
              /* 2) Check if capitalized array character is allowed:
              *    If it is, put HTML for image output into variable for HTML.
              */ 
-            //hentet fra: https://stackoverflow.com/questions/16312528/check-if-an-array-contains-any-element-of-another-array-in-javascript
-            const check = allowedCharactersArray.some(letter => capitalizedArray.includes(letter)) 
-            console.log(check)
-                if(check === true){
-                    document.getElementById("ransom-note").innerHTML += emptyText 
-                }
             
-                const checkSpace = spaceArray.some(spacing => capitalizedArray.includes(spacing))
+                const checkLetter = allowedCharactersArray.some(letter => capitalizedArray.includes(letter))
+                console.log(checkLetter)
+
+                if(checkLetter === true){
+                    document.getElementById("ransom-note").innerHTML = emptyText
+                }
+                
+                const checkSpace = capitalizedArray.includes(" ")
                 console.log(checkSpace)
-    
+
                 if (checkSpace === true ){
                     document.getElementById("ransom-note").innerHTML += '<span class="space-separator"></span>'
                 }
 
-                const checkMarks = marksArray.some( mark => capitalizedArray.includes(mark))
+                const checkMarks = marksArray.some(mark => capitalizedArray.includes(mark)) 
                 console.log(checkMarks)
 
                 if(checkMarks === true){
                     document.getElementById("ransom-note").innerHTML +=  '<img src="images/end.png">'
                 }
-         
-               
-                
-                
-                
-                
+                    
 
              /*    If not, put the character from the array into variable for HTML.
              */

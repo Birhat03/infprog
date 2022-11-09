@@ -10,7 +10,7 @@
 <body>
     <header>
         <h1>Exam 2</h1>
-        <button id="toggleMenu" aria-label="Open the menu">Menu <img src="menuicon.png" aria-hidden="true"></button>
+        <button onclick="menuClick()" id="toggleMenu" aria-label="Open the menu">Menu <img src="menuicon.png" aria-hidden="true"></button>
         <nav id="menu">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -49,30 +49,45 @@
          * 2) endre knappen til å inneholde teksten Close og bildet closeicon.png
          */
 
-
          function menuClick (){
             
-         }
+            //https://www.w3schools.com/howto/howto_js_remove_class.asp
+           if(menu.classList.contains("active")){
+            menu.classList.remove("active")
+            button.innerHTML = 'Menu <img src="menuicon.png" aria-hidden="true">'
+           } 
+
+           else{
+                 menu.classList.add("active")
+                 button.innerHTML = 'Close <img src="closeicon.png">'
+           }
+        
+            }
 
         
 
         //Variabel for meny-HTML
         //TODO: Skal ikke starte som en tom streng, må inneholde et punkt for å møte oppgaveteksten...
-        let menuHTML = ``
+        let menuHTML = `<ul>
+                <li><a href="index.html">Home</a></li>
+            `
 
         //Gå gjennom første nivå av menupoints-array
         menuPoints.map(category => {
             //TODO: Forbered HTML med overskrift og listestart
-            
+            menuHTML += `<h3>${category.menuheader}</h3>`
             //TODO: Gå gjennom array på andre nivå (menulinks)
             //TODO: For hver menulink: fyll menuHTML med listeelementer og link
-            
+            category.menulinks.map( category => {
+            menuHTML += `
+            <ul><li><a href="${category.url}">${category.menutext}</a></li></ul>`
+            })
             //TODO: Avslutt liste
             
         })
 
         //TODO: Skriv ut HTML til <nav>:
-        
+        menu.innerHTML = menuHTML
     </script>
 </body>
 </html>
