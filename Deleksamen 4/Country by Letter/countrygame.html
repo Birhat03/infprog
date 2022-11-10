@@ -58,7 +58,7 @@
         //User-guessed correct countries:
         let userCorrectGuesses = []
         //Map array with countryList elements lowercase for easier control against user input:
-        const countries_lower = countryList
+        const countries_lower = countryList.map( country => country.toLowerCase())
         console.log(countries_lower)
         //Prepare array to contain countries filtered by firstletter
         let countries = []
@@ -71,14 +71,14 @@
             //TODO: Set/Reset counter
             
             //TODO: Reset user guessed array
-            
+          
 
             /* TODO: 
              * INTERFACE UPDATES
              * Reset display list of guessed countries, game message, results and countdown timer
              * Hide startbutton and show the inputfield, set inputfield focus
              */
-            
+           
             
             /* TODO:
              * SINGLE GAME DEPENDENCIES
