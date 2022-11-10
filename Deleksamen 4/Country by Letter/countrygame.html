@@ -69,16 +69,21 @@
         function newGame() {
             //SETS/RESETS:
             //TODO: Set/Reset counter
-            
+            counter = 90
             //TODO: Reset user guessed array
-          
+            userCorrectGuesses = 0
 
             /* TODO: 
              * INTERFACE UPDATES
              * Reset display list of guessed countries, game message, results and countdown timer
              * Hide startbutton and show the inputfield, set inputfield focus
              */
-           
+
+            document.getElementById("countdown").innerHTML = counter
+            document.getElementById("correct").innerHTML = userCorrectGuesses
+
+            document.getElementById("startgame").style.display = "none"
+            
             
             /* TODO:
              * SINGLE GAME DEPENDENCIES
@@ -87,9 +92,13 @@
              * Print total countries to info and result display in interface
              * Start the timer
              */
-            
+             //hentet fra: https://www.kirupa.com/html5/picking_random_item_from_array.htm
+             let chosenLetter = firstLetters[Math.floor(Math.random() * firstLetters.length)];
+             document.getElementById("chosenLetter").innerHTML = chosenLetter
+             console.log(chosenLetter)
+      
         }
-
+        
         
 
         //Function for country-control when Enter is clicked
@@ -100,6 +109,8 @@
              * insert into guessed countries and add to list of guessed countries in interface
              * Update input field to be ready for new user guess
              */
+           
+             
         }
 
         //Function for printing the result:
