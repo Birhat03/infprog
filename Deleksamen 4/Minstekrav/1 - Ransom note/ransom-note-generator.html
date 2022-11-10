@@ -21,7 +21,7 @@
     </section>
     <script>
         //Prepare array with allowed characters
-        const allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        const allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !.?"
         const allowedCharactersArray = Array.from(allowedCharacters)
         const marks = "!.?"
         const marksArray = Array.from(marks)
@@ -51,7 +51,7 @@
              *    If it is, put HTML for image output into variable for HTML.
              */ 
             
-                const checkLetter = allowedCharactersArray.some(letter => capitalizedArray.includes(letter))
+                const checkLetter = capitalizedArray.every(letter => allowedCharactersArray.includes(letter))
                 console.log(checkLetter)
 
                 if(checkLetter === true){
