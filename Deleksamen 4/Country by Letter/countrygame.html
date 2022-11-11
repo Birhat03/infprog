@@ -23,7 +23,8 @@
             </div>
             <div id="startgame">
                 <p id="startmessage"></p>
-                <button id="startbutton">New game</button>
+                <!--La til onclick="newGame()" -->
+                <button onclick="newGame()" id="startbutton">New game</button>
             </div>
         </div>
         <div id="userGuessed">
@@ -71,7 +72,7 @@
             //TODO: Set/Reset counter
             counter = 90
             //TODO: Reset user guessed array
-            userCorrectGuesses = 0
+            userCorrectGuesses = []
 
             /* TODO: 
              * INTERFACE UPDATES
@@ -79,10 +80,15 @@
              * Hide startbutton and show the inputfield, set inputfield focus
              */
 
+            
+            document.getElementById("correct").innerHTML = userCorrectGuesses.length
             document.getElementById("countdown").innerHTML = counter
-            document.getElementById("correct").innerHTML = userCorrectGuesses
-
+            document.getElementById("userCorrectList").innerHTML = userCorrectGuesses
+            document.getElementById("userguess").value = null
             document.getElementById("startgame").style.display = "none"
+            document.getElementById("userInputArea").style.display = "block"
+            inputfield.focus()
+           
             
             
             /* TODO:
@@ -93,11 +99,53 @@
              * Start the timer
              */
              //hentet fra: https://www.kirupa.com/html5/picking_random_item_from_array.htm
-             let chosenLetter = firstLetters[Math.floor(Math.random() * firstLetters.length)];
+             let chosenLetter = firstLetters[Math.floor(Math.random() * firstLetters.length)]
              document.getElementById("chosenLetter").innerHTML = chosenLetter
              console.log(chosenLetter)
             
+            //kode hentet fra: https://stackoverflow.com/questions/58894986/javascript-filtering-array-items-for-the-first-letter-and-then-for-the-others
+            countries = countries_lower.filter(chosenCountry => chosenCountry.trim().toLowerCase().startsWith(chosenLetter.trim().toLowerCase()))
+            console.log(countries)
+            document.getElementById("countryAmount").innerHTML = countries.length
+            document.getElementById("total").innerHTML = countries.length
+
+        //Countdown functionality
+        //putta countdown funksjonen inni newGame()
+        //noen koder hentet fra deleksamen 3:
+        countInterval = setInterval(countdown, 1000)
+        function countdown() {
+            /* TODO:
+              Reduce counter by one (each second) */
+            counter--
+
+            // Update interface display
+            document.getElementById("countdown").innerHTML = counter
+            document.getElementById("countdown").style.color = "#6ea100"
+            //borderColor kode hentet fra: https://www.w3schools.com/jsref/prop_style_bordercolor.asp
+            document.getElementById("countdown").style.borderColor = "#6ea100"
+
+            //Update interface colors at 45 and 20 seconds left
+            if (counter <= 45){
+            document.getElementById("countdown").style.color = "orange"
+            document.getElementById("countdown").style.borderColor = "orange"
+            }
+
+            if (counter <= 20){
+                document.getElementById("countdown").style.color = "red"
+                document.getElementById("countdown").style.borderColor = "red"
+            }
             
+            //Stop timer when counter reaches zero, and set gameover()
+            if (counter <= 0){
+                counter = 0
+                gameover()
+                clearInterval(countInterval)
+            }  
+            if(userCorrectGuesses.length === countries.length){
+                checkAndPrintResult()
+                clearInterval(countInterval)
+            }
+        }
             
         }
         
@@ -106,13 +154,25 @@
         //Function for country-control when Enter is clicked
         function checkCountry() {
             /* TODO:
-             * Fetch the guessed country, make sure to have correct capialization
-             * If it is a country in the list, and not already guessed, 
-             * insert into guessed countries and add to list of guessed countries in interface
-             * Update input field to be ready for new user guess
-             */
-           
-             
+             * Fetch the guessed country, make sure to have correct capialization */
+             let inputText = document.getElementById("userguess").value 
+             const capitalized = inputText.toLowerCase()
+             console.log(capitalized)
+             countries.map(chosenCountry => {
+                //If it is a country in the list, and not already guessed, 
+                //if it not includes kode hentet fra: https://bobbyhadz.com/blog/javascript-array-not-includes
+                if(!userCorrectGuesses.includes(capitalized)){
+                if(chosenCountry === capitalized){
+                    // insert into guessed countries and add to list of guessed countries in interface
+                    userCorrectGuesses.push(chosenCountry)
+                    console.log(userCorrectGuesses)
+                    document.getElementById("correct").innerHTML = userCorrectGuesses.length
+                    document.getElementById("userCorrectList").innerHTML += `<li>${chosenCountry}</li>`
+                }
+            } 
+             })
+             // Update input field to be ready for new user guess
+             document.getElementById("userguess").value = null 
         }
 
         //Function for printing the result:
@@ -121,22 +181,23 @@
              * Update interface with results.
              * Check if all countries are found. If so, replace input with message and stop countdown
              * */
-            
+                clearInterval(countInterval)
+                document.getElementById("userInputArea").style.display = "none"
+                document.getElementById("startgame").style.display = "block"
+                document.getElementById("startmessage").innerHTML = `Congratulations, you guessed all the countries! Wanna try again?`
+
+
+
         }
 
         //TODO: listen for Enter-key key-press. When found, check input-country.
-        
-
-        //Countdown functionality
-        function countdown() {
-            /* TODO:
-             * Reduce counter by one (each second)
-             * Update interface display
-             * Update interface colors at 45 and 20 seconds left
-             * Stop timer when counter reaches zero, and set gameover()
-             */
-            
+        //hentet fra: https://stackoverflow.com/questions/14735197/activate-a-javascript-function-with-a-keypress
+        window.onkeypress = function(event){
+            if (event.key === 'Enter'){
+                checkCountry()
+            }
         }
+        
         
 
         //Game Over functionality
