@@ -13,7 +13,6 @@
             <label for="text">Enter text to ransomize:</label>
             <textarea id="text" name="name" rows="8"></textarea>
         </p>
-        <!--Skrev inn onclick="makeRansom()", sånn at makeRansom funksjonen kjører når button blir klikka på-->
         <button onclick="makeRansom()">Ransomize text</button>
     </section>
     <section id="ransom-note">
@@ -21,73 +20,59 @@
     </section>
     <script>
         //Prepare array with allowed characters
-        const allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !.?"
+        const allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         const allowedCharactersArray = Array.from(allowedCharacters)
-        const marks = "!.?"
-        const marksArray = Array.from(marks)
-  
-     
+
         //Create function to run on button click
         function makeRansom() {
             //TODO: Fetch text from textarea
             let textArea = document.getElementById("text").value
-
 
             //TODO: Ensure correct capitalization of text string fetched
             const capitalized = textArea.toUpperCase()
 
             //TODO: Make capitalized text string into array
             const capitalizedArray = Array.from(capitalized)
-            
+            console.log(capitalizedArray)
             //TODO: Prepare empty string variable for HTML
             let emptyText = ""
 
             /* TODO:
-             * 1) Go through array of characters
-             */
-             
-              capitalizedArray.map((textinput) => {emptyText += `<img src="images/${textinput}.png">`})
-             /* 2) Check if capitalized array character is allowed:
-             *    If it is, put HTML for image output into variable for HTML.
-             */ 
+             * 1) Go through array of characters*/
+             capitalizedArray.map(letter => { 
+    
+            //2) Check if capitalized array character is allowed:
+            //  If it is, put HTML for image output into variable for HTML.  
+            allowedCharactersArray.map(allowedChar => {
+                if (letter === allowedChar){
+                    emptyText += `<img src="images/${allowedChar}.png">`
+                }
+            }) 
+
+            /*
+              Rules to ALSO check: 
+                 1) If character in array is a period (.), question mark (?), or exclamation mark (!),
+                    use the end.png-file (image of exclamation mark) */
             
-                const checkLetter = capitalizedArray.every(letter => allowedCharactersArray.includes(letter))
-                console.log(checkLetter)
+            if(letter === "!"){
+                emptyText += '<img src="images/end.png">'
+            }
 
-                if(checkLetter === true){
-                    document.getElementById("ransom-note").innerHTML = emptyText
-                }
-                
-                const checkSpace = capitalizedArray.includes(" ")
-                console.log(checkSpace)
+            if(letter === "."){
+                emptyText += '<img src="images/end.png">'
+            }
 
-                if (checkSpace === true ){
-                    document.getElementById("ransom-note").innerHTML += '<span class="space-separator"></span>'
-                }
-
-                const checkMarks = marksArray.some(mark => capitalizedArray.includes(mark)) 
-                console.log(checkMarks)
-
-                if(checkMarks === true){
-                    document.getElementById("ransom-note").innerHTML +=  '<img src="images/end.png">'
-                }
-                    
-
-             /*    If not, put the character from the array into variable for HTML.
-             */
-                    
-             /* Rules to ALSO check: 
-             *    1) If character in array is a period (.), question mark (?), or exclamation mark (!),
-             *       use the end.png-file (image of exclamation mark)
-             *    2) If character is a space, insert <span class="space-separator"></span> into variabel for HTML
-             * */
-
+            if(letter === "?"){
+                emptyText += '<img src="images/end.png">'
+            }
+            //2) If character is a space, insert <span class="space-separator"></span> into variabel for HTML
+            if(letter === " ")
+             emptyText += '<span class="space-separator"></span>'
+            })
 
             //TODO: Write HTML output to #ransom-note
-            
+             document.getElementById("ransom-note").innerHTML = emptyText
         }
-        
-        
     </script>
 </body>
 </html>
