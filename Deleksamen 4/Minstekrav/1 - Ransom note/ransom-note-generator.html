@@ -43,6 +43,7 @@
     
             //2) Check if capitalized array character is allowed:
             //  If it is, put HTML for image output into variable for HTML.  
+            //Går gjennom arrayen og gir parameter allowedChar og bruker if test på den
             allowedCharactersArray.map(allowedChar => {
                 if (letter === allowedChar){
                     emptyText += `<img src="images/${allowedChar}.png">`
@@ -53,7 +54,7 @@
               Rules to ALSO check: 
                  1) If character in array is a period (.), question mark (?), or exclamation mark (!),
                     use the end.png-file (image of exclamation mark) */
-            
+            //If test på parameter letter for å sjekke hver bokstav
             if(letter === "!"){
                 emptyText += '<img src="images/end.png">'
             }

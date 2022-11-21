@@ -51,13 +51,15 @@
 
          function menuClick (){
             
-            //https://www.w3schools.com/howto/howto_js_remove_class.asp
+            //kode hentet fra: https://www.w3schools.com/howto/howto_js_remove_class.asp
+            // https://www.javascripttutorial.net/dom/css/check-if-an-element-contains-a-class/
            if(menu.classList.contains("active")){
             menu.classList.remove("active")
             button.innerHTML = 'Menu <img src="menuicon.png" aria-hidden="true">'
            } 
 
            else{
+            //kode hentet fra: https://www.w3schools.com/howto/howto_js_add_class.asp
                  menu.classList.add("active")
                  button.innerHTML = 'Close <img src="closeicon.png">'
            }
